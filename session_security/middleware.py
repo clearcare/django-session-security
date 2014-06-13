@@ -31,6 +31,12 @@ class SessionSecurityMiddleware(object):
         if not request.user.is_authenticated():
             return
 
+        if request.profile is None:
+            return
+
+        if request.profile.caregiver is None:
+            return
+
         now = datetime.now()
         self.update_last_activity(request, now)
 
